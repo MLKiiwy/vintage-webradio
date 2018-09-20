@@ -174,7 +174,33 @@ And connect :
 Led will switch on automatically on startup because of Serial Tx (And blink), and switch off after halt.
 Wake up of raspberry is a built in feature.
 
+For shutdown :
+```
+
+```
+
+Good resource :
+https://howchoo.com/g/mwnlytk3zmm/how-to-add-a-power-button-to-your-raspberry-pi
+https://howchoo.com/g/ytzjyzy4m2e/build-a-simple-raspberry-pi-led-power-status-indicator
+
 # Usefull 
+
+## Install Git + vim on raspberry
+
+```sh
+sudo apt-get install git vim
+
+# Config git
+git config --global user.email "labrut@gmail.com"
+git config --global user.name "Mikael Labrut"
+
+# Create ssh key
+ssh-keygen -t rsa -b 4096 -C "labrut@gmail.com"
+eval "$(ssh-agent -s)"
+cat /home/pi/.ssh/id_rsa.pub
+# And now go to github
+```
+
 
 https://pinout.xyz/pinout/pin5_gpio3 -> Raspberry zero pinout
 
