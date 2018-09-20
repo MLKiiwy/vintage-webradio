@@ -161,41 +161,32 @@ We use one for selection / power and another one for volume control.
 
 ## Power button + Led status indicator
 
-Add into /boot/config
-
-```bash
-enable_uart=1
-```
-
-And connect :
+Connect :
 - Push button to PIN 5 (SCL - Line 2 - Pin 3) and PIN 6 (GND - Line 1 - Pin 3) 
 - Led with 200 Ohm resistor between GND and Pin 8 (TXD - Line 1 - Pin 4)
 
 Led will switch on automatically on startup because of Serial Tx (And blink), and switch off after halt.
 Wake up of raspberry is a built in feature.
-
-For shutdown :
-```
-
-```
+Shutdown is done with a daemon installed by our script. 
 
 Good resource :
 https://howchoo.com/g/mwnlytk3zmm/how-to-add-a-power-button-to-your-raspberry-pi
 https://howchoo.com/g/ytzjyzy4m2e/build-a-simple-raspberry-pi-led-power-status-indicator
+https://github.com/gilyes/pi-shutdown
 
 # Usefull 
 
-## Install Git + vim on raspberry
+## Install Git + vim on raspberry 
 
 ```sh
 sudo apt-get install git vim
 
 # Config git
-git config --global user.email "labrut@gmail.com"
+git config --global user.email "myemail@gmail.com"
 git config --global user.name "Mikael Labrut"
 
 # Create ssh key
-ssh-keygen -t rsa -b 4096 -C "labrut@gmail.com"
+ssh-keygen -t rsa -b 4096 -C "myemail@gmail.com"
 eval "$(ssh-agent -s)"
 cat /home/pi/.ssh/id_rsa.pub
 # And now go to github

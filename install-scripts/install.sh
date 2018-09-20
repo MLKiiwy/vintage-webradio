@@ -1,5 +1,9 @@
 #! /bin/sh
 
+# Enable serial (Use for led power indicator)
+
+echo "enable_uart=1" >> /boot/config
+
 # Install the daemon listen-for-shutdown.py
 
 # Install the binary
