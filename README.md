@@ -46,6 +46,15 @@ When connected, use "sudo raspi-config" to finish installtion. (I change the hos
 
 Just follow this tutorial : https://learn.adafruit.com/adafruit-max98357-i2s-class-d-mono-amp/overview
 
+Connection : 
+
+Amp  |  Pi
+Vin  | Vin (Line 1 - Pin 1)
+Gnd  | Gnd (Line 1 - Pin 3)
+BCLK | PWM0 18 (Line 1 - Pin 6)
+LRC  | SLCK 21 (Line 1 - Pin 20)
+DIN  | MISO 19 (Line 2 - Pin 18)
+
 # Step 3 : Install and configure modipy
 
 https://www.mopidy.com
@@ -98,24 +107,28 @@ sudo apt-get install mopidy-spotify
 
 ## Configure
 
-TODO : the config file is not the one in user dire but in /etc/...
+See file "/etc/mopidy/mopidy.conf"
 
-```ssh
-```
+```bash
+[core]
+cache_dir = /var/cache/mopidy
+config_dir = /etc/mopidy
+data_dir = /var/lib/mopidy
 
+[logging]
+config_file = /etc/mopidy/logging.conf
+debug_file = /var/log/mopidy/mopidy-debug.log
 
-Set the file like this :
+[local]
+media_dir = /var/lib/mopidy/media
 
-TODO : update
+[m3u]
+playlists_dir = /var/lib/mopidy/playlists
 
-```ssh
 [mpd]
-enabled=true
-hostname=::
-port=6600
-max_connection=20
-connection_timeout=60
-zeroconf=Mopidy MPD server on $hostname
+enabled = true
+hostname = ::
+port = 6600
 
 [http]
 enabled=true
@@ -138,3 +151,30 @@ Warning : check that your config is loaded into the service, this command will s
 ```ssh
 sudo mopidyctl config
 ```
+
+# Controls
+
+We have two rotary encoder EC11.
+
+We use one for selection / power and another one for volume control.
+
+
+## Power button + Led status indicator
+
+Add into /boot/config
+
+```bash
+enable_uart=1
+```
+
+And connect :
+- Push button to PIN 5 (SCL - Line 2 - Pin 3) and PIN 6 (GND - Line 1 - Pin 3) 
+- Led with 200 Ohm resistor between GND and Pin 8 (TXD - Line 1 - Pin 4)
+
+Led will switch on automatically on startup because of Serial Tx (And blink), and switch off after halt.
+Wake up of raspberry is a built in feature.
+
+# Usefull 
+
+https://pinout.xyz/pinout/pin5_gpio3 -> Raspberry zero pinout
+
