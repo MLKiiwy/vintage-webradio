@@ -13,8 +13,10 @@ GPIO.setwarnings(False)
 shutdownPin = 5
 # Blue color is used when button is pressed
 bluePin = 13
-# Red color is used to indicate power on
+# Red color is used to indicate boot
 redPin = 8
+# Green color is used to indicate everything is working
+greenPin = 11
 
 # if button pressed for at least this long then shut down. if less then reboot.
 shutdownMinSeconds = 3
@@ -23,8 +25,10 @@ GPIO.setmode(GPIO.BOARD)
 GPIO.setup(shutdownPin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(bluePin, GPIO.OUT)
 GPIO.setup(redPin, GPIO.OUT)
+GPIO.setup(greenPin, GPIO.OUT)
 
-GPIO.output(redPin, GPIO.HIGH)
+GPIO.output(redPin, GPIO.LOW)
+GPIO.output(greenPin, GPIO.HIGH)
 
 buttonPressedTime = None
 
@@ -43,6 +47,8 @@ def buttonStateChanged(pin):
             buttonPressedTime = None
             GPIO.output(bluePin, GPIO.LOW)
             if elapsed >= shutdownMinSeconds:
+                GPIO.output(redPin, GPIO.HIGH)
+                GPIO.output(greenPin, GPIO.LOW)
                 # button pressed for more than specified time, shutdown
                 call(['shutdown', '-h', 'now'], shell=False)
 
