@@ -11,7 +11,10 @@ GPIO.setwarnings(False)
 # pushbutton connected to this GPIO pin, using pin 5 also has the benefit of
 # waking / powering up Raspberry Pi when button is pressed
 shutdownPin = 5
+# Blue color is used when button is pressed
 bluePin = 13
+# Red color is used to indicate power on
+redPin = 8
 
 # if button pressed for at least this long then shut down. if less then reboot.
 shutdownMinSeconds = 3
@@ -19,6 +22,9 @@ shutdownMinSeconds = 3
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(shutdownPin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(bluePin, GPIO.OUT)
+GPIO.setup(redPin, GPIO.OUT)
+
+GPIO.output(redPin, GPIO.HIGH)
 
 buttonPressedTime = None
 
