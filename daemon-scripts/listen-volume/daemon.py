@@ -26,5 +26,4 @@ while True:
         else:
                 print "Volume -"
                 os.system("amixer set 'PCM' 10%-")
-        clkLastState = clkState
         sleep(0.01)
