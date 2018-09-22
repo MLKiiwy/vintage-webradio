@@ -23,8 +23,8 @@ while True:
         message = eventq.get()
         if message == 1:
                 print "Volume +"
-                os.system("amixer set 'PCM' 10%+")
+                os.system("amixer set 'PCM' 5%+")
         else:
                 print "Volume -"
-                os.system("amixer set 'PCM' 10%-")
+                os.system("amixer set 'PCM' 5%-")
         time.sleep(0.01)
