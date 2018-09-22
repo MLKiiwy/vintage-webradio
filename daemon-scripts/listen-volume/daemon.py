@@ -15,7 +15,6 @@ GPIO.setup(dt, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
 counter = 0
 clkLastState = GPIO.input(clk)
-currVolume = 50
 
 try:
         while True:
@@ -23,11 +22,11 @@ try:
                 dtState = GPIO.input(dt)
                 if clkState != clkLastState:
                         if dtState != clkState:
-                                currVolume += 5
+                                print "Volume +"
+                                os.system("amixer set 'Master' 10%+")
                         else:
-                                currVolume -= 5
-                        print currVolume
-                        os.system("mpc volume " + str(currVolume))
+                                print "Volume -"
+                                os.system("amixer set 'Master' 10%-")
                         clkLastState = clkState
                         sleep(0.01)
 finally:
