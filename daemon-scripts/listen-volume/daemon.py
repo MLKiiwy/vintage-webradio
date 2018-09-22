@@ -23,10 +23,10 @@ try:
                 if clkState != clkLastState:
                         if dtState != clkState:
                                 print "Volume +"
-                                os.system("amixer set 'Master' 10%+")
+                                os.system("amixer set 'PCM' 10%+")
                         else:
                                 print "Volume -"
-                                os.system("amixer set 'Master' 10%-")
+                                os.system("amixer set 'PCM' 10%-")
                         clkLastState = clkState
                         sleep(0.01)
 finally:
