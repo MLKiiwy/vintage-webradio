@@ -3,6 +3,7 @@
 from gpiozero import Button
 import Queue
 import os
+import time
 
 eventq = Queue.Queue()
 
@@ -26,4 +27,4 @@ while True:
         else:
                 print "Volume -"
                 os.system("amixer set 'PCM' 10%-")
-        sleep(0.01)
+        time.sleep(0.01)
