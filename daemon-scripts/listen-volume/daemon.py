@@ -29,3 +29,4 @@ try:
                         os.system("amixer set 'PCM' 10%-")
                 clkLastState = clkState
                 sleep(0.01)
+finally:
