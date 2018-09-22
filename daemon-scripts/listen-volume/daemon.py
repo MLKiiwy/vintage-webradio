@@ -18,15 +18,13 @@ def pin_b_rising():                    # Pin B event handler
 pin_a.when_pressed = pin_a_rising      # Register the event handler for pin A
 pin_b.when_pressed = pin_b_rising      # Register the event handler for pin B
 
-try: 
-        while True:
-                message = eventq.get()
-                if message == 1:
-                        print "Volume +"
-                        os.system("amixer set 'PCM' 10%+")
-                else:
-                        print "Volume -"
-                        os.system("amixer set 'PCM' 10%-")
-                clkLastState = clkState
-                sleep(0.01)
-finally:
+while True:
+        message = eventq.get()
+        if message == 1:
+                print "Volume +"
+                os.system("amixer set 'PCM' 10%+")
+        else:
+                print "Volume -"
+                os.system("amixer set 'PCM' 10%-")
+        clkLastState = clkState
+        sleep(0.01)
