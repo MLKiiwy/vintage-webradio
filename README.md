@@ -48,12 +48,12 @@ Just follow this tutorial : https://learn.adafruit.com/adafruit-max98357-i2s-cla
 
 Connection : 
 
-Amp  |  Pi
-Vin  | Vin (Line 1 - Pin 1)
-Gnd  | Gnd (Line 1 - Pin 3)
-BCLK | PWM0 18 (Line 1 - Pin 6)
-LRC  | SLCK 21 (Line 1 - Pin 20)
-DIN  | MISO 19 (Line 2 - Pin 18)
+- Amp  |  Pi
+- Vin  | Vin (Line 1 - Pin 1)
+- Gnd  | Gnd (Line 1 - Pin 3)
+- BCLK | PWM0 18 (Line 1 - Pin 6)
+- LRC  | SLCK 21 (Line 1 - Pin 20)
+- DIN  | MISO 19 (Line 2 - Pin 18)
 
 # Step 3 : Install and configure modipy
 

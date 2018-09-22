@@ -4,6 +4,9 @@
 
 echo "enable_uart=1" >> /boot/config
 
+# Install library gpiozero
+sudo apt install python-gpiozero
+
 # Install the daemon listen-for-shutdown.py
 
 # Install the binary
