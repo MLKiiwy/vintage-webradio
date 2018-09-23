@@ -49,11 +49,11 @@ Just follow this tutorial : https://learn.adafruit.com/adafruit-max98357-i2s-cla
 Connection : 
 
 - Amp  |  Pi
-- Vin  | Vin (Line 1 - Pin 1)
-- Gnd  | Gnd (Line 1 - Pin 3)
-- BCLK | PWM0 18 (Line 1 - Pin 6)
-- LRC  | SLCK 21 (Line 1 - Pin 20)
-- DIN  | MISO 19 (Line 2 - Pin 18)
+- Vin  | Vin 5V (Line 1 - Pin 1)
+- Gnd  | Gnd 
+- BCLK | Pin 12 ( BCM 18 - PWM0 - Line 1 - Pin 6)
+- LRC  | Pin 35 ( BCM 19 - MISO - Line 2 - Pin 18)
+- DIN  | Pin 40 ( SCLK - Line 1 - Pin 20)
 
 # Step 3 : Install and configure modipy
 
@@ -158,12 +158,14 @@ We have two rotary encoder EC11.
 
 We use one for selection / power and another one for volume control.
 
-
 ## Power button + Led status indicator
 
 Connect :
 - Push button to PIN 5 (SCL - Line 2 - Pin 3) and PIN 6 (GND - Line 1 - Pin 3) 
-- Led with 200 Ohm resistor between GND and Pin 8 (TXD - Line 1 - Pin 4)
+- Red Led Pin with 200 Ohm resistor between GND and Pin 8 (TXD - Line 1 - Pin 4)
+- Green Led Pin with 200 Ohm resistor to Pin 11 (BCM 17 - Line 2 - Pin 6)
+- Blue Led Pin with 200 Ohm resistor to Pin 13 (BCM 27 - Line 2 - Pin 7)
+- Led base Pin to GND
 
 Led will switch on automatically on startup because of Serial Tx (And blink), and switch off after halt.
 Wake up of raspberry is a built in feature.
@@ -173,6 +175,14 @@ Good resource :
 https://howchoo.com/g/mwnlytk3zmm/how-to-add-a-power-button-to-your-raspberry-pi
 https://howchoo.com/g/ytzjyzy4m2e/build-a-simple-raspberry-pi-led-power-status-indicator
 https://github.com/gilyes/pi-shutdown
+
+## Volume
+
+Connect : 
+- Central Pin rotary encoder to GND
+- Left Pin rotary encoder to Pin 31 (BCM 6 - Line 2 Pin 16)
+- Right Pin rotary encoder to Pin 31 (BCM 6 - Line 2 Pin 17)
+
 
 # Usefull 
 
