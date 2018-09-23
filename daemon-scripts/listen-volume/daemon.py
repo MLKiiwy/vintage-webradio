@@ -1,5 +1,6 @@
 #!/usr/bin/python
 # Control volume with rotary encoder
+# Source : https://www.raspberrypi.org/forums/viewtopic.php?t=198815
 from gpiozero import Button
 import Queue
 import os
