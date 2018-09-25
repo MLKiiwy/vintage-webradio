@@ -158,6 +158,19 @@ We have two rotary encoder EC11.
 
 We use one for selection / power and another one for volume control.
 
+## Power 
+
+Using a modified power bank, to power the raspberry.
+Just keep the battery of the power bank. 
+
+And use : 
+- a module TP4056 for charging the battery (with battery protection against surcharge and discharge)
+- A DC-DC 3V to 5V converter
+
+Normally if everything is good, you can connect directly with wires the converter to raspberry pi (no need of USB cable)
+
+=> Waiting the DC/DC for test
+
 ## Power button + Led status indicator
 
 Connect :
@@ -183,6 +196,21 @@ Connect :
 - Left Pin rotary encoder to Pin 31 (BCM 6 - Line 2 Pin 16)
 - Right Pin rotary encoder to Pin 31 (BCM 6 - Line 2 Pin 17)
 
+## Radio selection 
+
+Referer : https://baheyeldin.com/technology/linux/raspberry-pi-2-internet-radio-using-mopidy.html
+
+See folder : /var/lib/mopidy/playlists/
+
+Each radio should have a .m3u like : 
+
+```
+#EXTM3U
+#EXTINF:0,NAME OF RADIO STATIONS
+STREAM
+```
+
+See examples on radios dir.
 
 # Usefull 
 
