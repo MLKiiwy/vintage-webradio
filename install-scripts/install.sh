@@ -8,6 +8,8 @@ echo "enable_uart=1" >> /boot/config
 # -------------------------------
 # Install library gpiozero
 sudo apt install python-gpiozero
+# Install library mpd2
+pip install python-mpd2
 
 # -------------------------------
 # Install the daemon listen-for-shutdown.py
@@ -47,3 +49,18 @@ sudo cp -r ./radios/* /var/lib/mopidy/playlists/
 chmod 777 /var/lib/mopidy/playlists/*
 sudo service mopidy restart
 
+# -------------------------------
+# Install the daemon listen-radios-selector.py
+
+### Install the binary
+sudo cp ./daemon-scripts/listen-radios-selector/daemon.py /usr/local/bin/listen-radios-selector.py
+sudo chmod +x /usr/local/bin/listen-radios-selector.py
+
+### Setup service
+sudo cp ./daemon-scripts/listen-radios-selector/service.sh /etc/init.d/listen-radios-selector.sh
+sudo chmod +x /etc/init.d/listen-radios-selector.sh
+
+### Now we'll register the script to run on boot.
+sudo update-rc.d listen-radios-selector.sh defaults
+
+sudo /etc/init.d/listen-radios-selector.sh start
