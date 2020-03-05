@@ -44,7 +44,7 @@ sudo /etc/init.d/listen-volume.sh start
 # -------------------------------
 # Install radios
 sudo cp -r ./radios/* /var/lib/mopidy/playlists/
-chmod 777 /var/lib/mopidy/playlists/*
+sudo chmod 777 /var/lib/mopidy/playlists/*
 sudo service mopidy restart
 
 # -------------------------------
