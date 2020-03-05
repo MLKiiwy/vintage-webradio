@@ -3,7 +3,7 @@
 AutoplayMpc () {
         theplaylist=$1
         thetimeout=120 #seconds
-        theprefix="[AutostartMpc]“
+        theprefix="[AutostartMpc]"
         logger "$theprefix Started"
         loops=1
         while true;
