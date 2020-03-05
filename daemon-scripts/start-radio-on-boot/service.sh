@@ -14,7 +14,7 @@
 case "$1" in
   start)
     echo "Starting start-radio.sh"
-    /usr/local/bin/start-radio.sh
+    /usr/local/bin/start-radio.sh sky_radio
     ;;
   *)
     echo "Usage: /etc/init.d/start-radio-on-boot.sh {start}"

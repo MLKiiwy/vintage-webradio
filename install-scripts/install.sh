@@ -50,6 +50,9 @@ sudo service mopidy restart
 # -------------------------------
 # Install start-up script
 
+# Require mpc to work
+sudo apt-get install mpc
+
 ### Install the binary
 sudo cp -r ./daemon-scripts/start-radio-on-boot/start-radio.sh /usr/local/bin/start-radio.sh
 sudo chmod +x /usr/local/bin/start-radio.sh
