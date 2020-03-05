@@ -47,3 +47,16 @@ sudo cp -r ./radios/* /var/lib/mopidy/playlists/
 chmod 777 /var/lib/mopidy/playlists/*
 sudo service mopidy restart
 
+# -------------------------------
+# Install start-up script
+
+### Install the binary
+sudo cp -r ./daemon-scripts/start-radio-on-boot/start-radio.sh /usr/local/bin/start-radio.sh
+sudo chmod +x /usr/local/bin/start-radio.sh
+
+### Setup service
+sudo cp ./daemon-scripts/start-radio-on-boot/service.sh /etc/init.d/start-radio-on-boot.sh
+sudo chmod +x /etc/init.d/start-radio-on-boot.sh
+
+### Now we'll register the script to run on boot.
+sudo update-rc.d start-radio-on-boot.sh defaults

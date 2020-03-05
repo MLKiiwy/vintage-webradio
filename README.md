@@ -9,9 +9,8 @@ Transform an old vintage radio from the 50's into a modern portable webradio.
 
 # Inspiration
 
-A good project, quite similar : 
+A good project, quite similar :
 https://www.hackster.io/tinkernut/diy-vintage-spotify-radio-using-a-raspberry-pi-bc3322
-
 
 # Step 1 : Install system base
 
@@ -21,7 +20,7 @@ Follow installation instruction to put it on the SD Card https://www.raspberrypi
 Because, I don't have any screen, configure wifi before turning on the raspberry.
 Follow instructions here : https://core-electronics.com.au/tutorials/raspberry-pi-zerow-headless-wifi-setup.html OR https://www.raspberrypi.org/documentation/configuration/wireless/headless.md
 
-To summarize, create the file "/boot/wpa_supplicant.conf" on the "boot" image 
+To summarize, create the file "/boot/wpa_supplicant.conf" on the "boot" image
 With content :
 
 ```bash
@@ -34,6 +33,7 @@ network={
 	key_mgmt=WPA-PSK
 }
 ```
+
 And also an empty ssh file : "/boot/ssh"
 
 Put the card on the raspberry pi, and search on netwoork the IP.
@@ -42,24 +42,25 @@ With code : raspberry
 
 When connected, use "sudo raspi-config" to finish installtion. (I change the hostname to : vintage-webradio)
 
-# Step 2 : Wire Amp and setup system to use it 
+# Step 2 : Wire Amp and setup system to use it
 
 Just follow this tutorial : https://learn.adafruit.com/adafruit-max98357-i2s-class-d-mono-amp/overview
 
-Connection : 
+Connection :
 
-- Amp  |  Pi
-- Vin  | Vin 5V (Line 1 - Pin 1)
-- Gnd  | Gnd 
+- Amp | Pi
+- Vin | Vin 5V (Line 1 - Pin 1)
+- Gnd | Gnd
 - BCLK | Pin 12 ( BCM 18 - PWM0 - Line 1 - Pin 6)
-- LRC  | Pin 35 ( BCM 19 - MISO - Line 2 - Pin 18)
-- DIN  | Pin 40 ( SCLK - Line 1 - Pin 20)
+- LRC | Pin 35 ( BCM 19 - MISO - Line 2 - Pin 18)
+- DIN | Pin 40 ( SCLK - Line 1 - Pin 20)
 
 # Step 3 : Install and configure modipy
 
 https://www.mopidy.com
 
 ## Check PERL locale setting warning
+
 Before installing modipy, check if your ssh client is correctly configured for locales. Because Raspbian system only support en_GB by default on lite versions.
 See : https://stackoverflow.com/questions/2499794/how-to-fix-a-locale-setting-warning-from-perl
 
@@ -158,23 +159,29 @@ We have two rotary encoder EC11.
 
 We use one for selection / power and another one for volume control.
 
-## Power 
+## Power
 
-Using a modified power bank, to power the raspberry.
-Just keep the battery of the power bank. 
+I built an UPS power system, so you plug it, unplug it when you want the output is always at 5V.
+Like the power system of a laptop. And I also put a battery level indicator.
 
-And use : 
-- a module TP4056 for charging the battery (with battery protection against surcharge and discharge)
-- A DC-DC 3V to 5V converter
+So we need:
 
-Normally if everything is good, you can connect directly with wires the converter to raspberry pi (no need of USB cable)
+- 3 x 18650 Battery (I use some from an old powerbank)
+- 1 x battery 18650 box older (aliexpress: Plastic DIY Lithium Battery Box Battery Holder With Pin Suitable For 4 \* 18650 (3.7V-7.4V) Lithium Battery)
+- 3 x Li-Ion protection card for discharge/surcharge (On aliexpress: 3.7V 4.2V 3A Li-ion Lithium Battery Charger Over Charge Discharge Overcurrent Protection Board for 18650 TP4056 DD05CVS )
+- 1 x 5V UPS Module with DC DC Converter + charger (On aliexpress: 2 in 1 Charger & Discharger Board DC DC Converter Step-up Module Charge in 4.5-8V Boost out 5V for UPS mobile poweru)
+- 1 x Mini-USB connector
+- 1 x Battery level indicator (aliexpress: 1S 2S 3S 4S Single 3.7V Lithium Battery Capacity Indicator Module 4.2V Blue Display Electric Vehicle Battery Power Tester Li-ion)
 
-=> Waiting the DC/DC for test
+Connect the UPS module to the batteries (with one protection per battery), follow the schemes:
+![Batteries with protection](./assets/battery-protect.png)
+![5V UPS](./assets/ups.png)
 
 ## Power button + Led status indicator
 
 Connect :
-- Push button to PIN 5 (SCL - Line 2 - Pin 3) and PIN 6 (GND - Line 1 - Pin 3) 
+
+- Push button to PIN 5 (SCL - Line 2 - Pin 3) and PIN 6 (GND - Line 1 - Pin 3)
 - Red Led Pin with 200 Ohm resistor between GND and Pin 8 (TXD - Line 1 - Pin 4)
 - Green Led Pin with 200 Ohm resistor to Pin 11 (BCM 17 - Line 2 - Pin 6)
 - Blue Led Pin with 200 Ohm resistor to Pin 13 (BCM 27 - Line 2 - Pin 7)
@@ -182,7 +189,7 @@ Connect :
 
 Led will switch on automatically on startup because of Serial Tx (And blink), and switch off after halt.
 Wake up of raspberry is a built in feature.
-Shutdown is done with a daemon installed by our script. 
+Shutdown is done with a daemon installed by our script.
 
 Good resource :
 https://howchoo.com/g/mwnlytk3zmm/how-to-add-a-power-button-to-your-raspberry-pi
@@ -191,18 +198,19 @@ https://github.com/gilyes/pi-shutdown
 
 ## Volume
 
-Connect : 
-- Central Pin rotary encoder to GND
-- Left Pin rotary encoder to Pin 31 (BCM 6 - Line 2 Pin 16)
-- Right Pin rotary encoder to Pin 31 (BCM 6 - Line 2 Pin 17)
+Connect :
 
-## Radio selection 
+- Central Pin rotary encoder to GND
+- Left Pin rotary encoder to Pin 31
+- Right Pin rotary encoder to Pin 33
+
+## Radio selection
 
 Referer : https://baheyeldin.com/technology/linux/raspberry-pi-2-internet-radio-using-mopidy.html
 
 See folder : /var/lib/mopidy/playlists/
 
-Each radio should have a .m3u like : 
+Each radio should have a .m3u like :
 
 ```
 #EXTM3U
@@ -212,9 +220,9 @@ STREAM
 
 See examples on radios dir.
 
-# Usefull 
+# Usefull
 
-## Install Git + vim on raspberry 
+## Install Git + vim on raspberry
 
 ```sh
 sudo apt-get install git vim
@@ -230,6 +238,6 @@ cat /home/pi/.ssh/id_rsa.pub
 # And now go to github
 ```
 
+# Pinout
 
 https://pinout.xyz/pinout/pin5_gpio3 -> Raspberry zero pinout
-
