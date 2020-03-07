@@ -220,6 +220,12 @@ STREAM
 
 See examples on radios dir.
 
+### Adding a radio
+
+Check on: http://vtuner.com/setupapp/guide/asp/BrowseStations/startpage.asp
+
+Open the stream page, and check with developer tools in the Network/Media Tab you should be able to find the stream URL.
+
 # Usefull
 
 ## Install Git + vim on raspberry
