@@ -42,6 +42,22 @@ sudo update-rc.d listen-volume.sh defaults
 sudo /etc/init.d/listen-volume.sh start
 
 # -------------------------------
+# Install the daemon listen-switch-radio.py
+
+### Install the binary
+sudo cp ./daemon-scripts/listen-switch-radio/daemon.py /usr/local/bin/listen-switch-radio.py
+sudo chmod +x /usr/local/bin/listen-switch-radio.py
+
+### Setup service
+sudo cp ./daemon-scripts/listen-switch-radio/service.sh /etc/init.d/listen-switch-radio.sh
+sudo chmod +x /etc/init.d/listen-switch-radio.sh
+
+### Now we'll register the script to run on boot.
+sudo update-rc.d listen-switch-radio.sh defaults
+
+sudo /etc/init.d/listen-switch-radio.sh start
+
+# -------------------------------
 # Install radios
 sudo cp -r ./radios/* /var/lib/mopidy/playlists/
 sudo chmod 777 /var/lib/mopidy/playlists/*
