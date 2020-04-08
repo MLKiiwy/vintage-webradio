@@ -3,7 +3,21 @@
 # -------------------------------
 # Enable serial (Use for led power indicator)
 
-echo "enable_uart=1" >> /boot/config
+echo "enable_uart=1" | sudo tee -a /boot/config.txt
+
+# Disable the LED (to save power)
+echo "dtparam=act_led_trigger=none" | sudo tee -a /boot/config.txt
+echo "dtparam=act_led_activelow=on" | sudo tee -a /boot/config.txt
+
+# Disable the HDMI port (to save power)
+echo "/usr/bin/tvservice -o" | sudo tee -a /etc/rc.local
+
+# Disable the rainbow splash screen for fast boot
+echo "disable_splash=1" | sudo tee -a /boot/config.txt
+
+# Disable the bluetooth
+echo "dtoverlay=pi3-disable-bt" | sudo tee -a /boot/config.txt
+
 
 # -------------------------------
 # Install library gpiozero
