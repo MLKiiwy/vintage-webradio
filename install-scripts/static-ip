@@ -1,0 +1,16 @@
+# To speed up the boot you can disable the dhcp service
+
+See
+https://raspberrypi.stackexchange.com/questions/37920/how-do-i-set-up-networking-wifi-static-ip-address/37921#37921
+
+# /etc/network/interfaces
+auto allow-hotplug wlan0
+iface wlan0 inet static
+        address 192.168.1.38
+        netmask 255.255.255.0
+        gateway 192.168.1.1
+    wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf
+
+# Disable dhcp and enable networking
+sudo systemctl disable dhcpcd
+sudo systemctl enable networking
